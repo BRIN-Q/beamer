@@ -1,0 +1,284 @@
+\documentclass[t,12pt,aspectratio=169]{beamer}
+\input{templates/seminar-light}
+\usepackage{adjustbox}
+
+%-----------------------------------------------------------
+\title{\LARGE \textbf{BRIN-Q Beamer Seminar Template}}
+\subtitle{QuMaT Group Meeting 20260119\\
+A. R. T. Nugraha (@fisikawan.gendeng)}
+\titlegraphic{
+\includegraphics[height=1.2cm]{templates/brinq-logo.png}
+\vspace{0.5cm}
+}
+%-----------------------------------------------------------
+\begin{document}
+%-----------------------------------------------------------
+\printcover
+%-----------------------------------------------------------
+\begin{frame}{Outline}
+%-----------------------------------------------------------
+%\begin{columns}
+%\column{\textwidth}
+    \tableofcontents
+%\end{columns}
+\end{frame}
+
+%===========================================================
+\section{Typography \& Lists}
+%===========================================================
+
+%-----------------------------------------------------------
+\begin{frame}{Typography \& Colors}
+%-----------------------------------------------------------
+    This template uses \textbf{Helvetica} for text and \textit{Euler} for math.
+    
+    \vspace{1em}
+    We can use the custom color palette defined in the preamble:
+    \begin{itemize}
+        \item Normal text is \textcolor{cw}{Dark Grey (cw)}.
+        \item Important keywords can be \textcolor{cp}{\textbf{Purple (cp)}}.
+        \item Alerts are naturally \textcolor{cr}{\textbf{Red (cr)}}.
+        \item Comments or secondary info are \textcolor{co}{\textit{Orange (co)}}.
+    \end{itemize}
+
+    \vspace{1em}
+    \centering
+    \textit{"Design is intelligence made visible."}
+\end{frame}
+
+%-----------------------------------------------------------
+\begin{frame}{Animated Lists (Enumerate)}
+%-----------------------------------------------------------
+    Here is the \textbf{Red Circle} enumeration style with step-by-step reveal:
+
+    \vspace{1em}
+    \begin{enumerate}
+        \item<1-> First point appears immediately.
+        \item<2-> Second point appears on next click.
+        \item<3-> Third point appears last.
+        \begin{itemize}
+            \item \small Sub-items use the standard purple arrow.
+            \item \small They fit strictly within the layout.
+        \end{itemize}
+    \end{enumerate}
+
+    \vspace{1em}
+    \onslide<4->{
+        \centering
+        \textcolor{co}{\textbf{Transitions are smooth and clear!}}
+    }
+\end{frame}
+
+%===========================================================
+\section{Mathematics \& Blocks}
+%===========================================================
+
+%-----------------------------------------------------------
+\begin{frame}{Theorems \& Blocks}
+%-----------------------------------------------------------
+    \begin{block}{Theorem 1 (Pythagoras)}
+        In a right-angled triangle, the square of the hypotenuse $c$ is equal to the sum of squares of the other two sides:
+        $$ a^2 + b^2 = c^2 $$
+    \end{block}
+
+    \vspace{1em}
+
+    \begin{exampleblock}{Example: Circle Area}
+        If the radius is $r = 10$, then the area is:
+        $$ A = \pi r^2 = 100\pi $$
+    \end{exampleblock}
+\end{frame}
+
+%-----------------------------------------------------------
+\begin{frame}{Euler Math Font Capabilities}
+%-----------------------------------------------------------
+    The \texttt{eulervm} package gives a distinct "handwritten" look.
+    
+    \begin{itemize}
+        \item \textbf{Greek Letters:} $\alpha, \beta, \Gamma, \Delta, \Omega, \xi, \varphi$
+        \item \textbf{Calculus:} 
+        $$ \int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi} $$
+        \item \textbf{Set Theory:} 
+        $$ \forall x \in \mathbb{R}, \exists y > x \text{ such that } y \in \mathcal{S} $$
+    \end{itemize}
+\end{frame}
+
+%-----------------------------------------------------------
+\begin{frame}{Handling Long Equations}
+%-----------------------------------------------------------
+    For complex derivations, use the \texttt{align*} environment:
+    
+    \begin{align*}
+        f(x) &= \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n \\
+             &= f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \dots \\
+             &\approx \underbrace{1 + x + \frac{x^2}{2}}_{\text{Approximation for } e^x}
+    \end{align*}
+    
+    \vspace{0.5em}
+    \small Note how the math font blends well with the comic style text.
+\end{frame}
+
+%===========================================================
+\section{Image Layouts}
+%===========================================================
+
+%-----------------------------------------------------------
+\begin{frame}{Split Layout (Left/Right)}
+%-----------------------------------------------------------
+    \begin{columns}[T] % T = align top
+        \column{0.48\textwidth}
+            \textbf{Concept Description}
+            
+            \vspace{0.5em}
+            This image demonstrates the core principle of the algorithm.
+            \begin{itemize}
+                \item Input processing
+                \item Feature extraction
+                \item Final classification
+            \end{itemize}
+
+        \column{0.48\textwidth}
+            \centering
+            % Standard dummy image from graphicx
+            \includegraphics[width=0.9\linewidth]{figs/fig01.jpg}
+    \end{columns}
+\end{frame}
+
+%-----------------------------------------------------------
+\begin{frame}{2 $\times$ 1 Figure Layout}
+%-----------------------------------------------------------
+    Comparing two results side-by-side:
+
+    \vspace{1em}
+    \begin{columns}
+        \column{0.48\textwidth}
+            \centering
+            \includegraphics[width=0.9\linewidth]{figs/fig02.jpg}
+            {\footnotesize Result A}
+        
+        \column{0.48\textwidth}
+            \centering
+            \includegraphics[width=0.9\linewidth]{figs/fig03.jpg}
+            {\footnotesize Result B}
+    \end{columns}
+\end{frame}
+
+%-----------------------------------------------------------
+\begin{frame}{3 $\times$ 1 Figure Layout}
+%-----------------------------------------------------------
+    Evolution of the dataset over time:
+
+    \vspace{1em}
+    \begin{columns}
+        \column{0.32\textwidth}
+            \includegraphics[width=\linewidth]{figs/fig02.jpg}
+            \centering \tiny $t=0$
+        
+        \column{0.32\textwidth}
+            \includegraphics[width=\linewidth]{figs/fig03.jpg}
+            \centering \tiny $t=10$
+
+        \column{0.32\textwidth}
+            \includegraphics[width=\linewidth]{figs/fig04.jpg}
+            \centering \tiny $t=100$
+    \end{columns}
+\end{frame}
+
+%-----------------------------------------------------------
+\begin{frame}{2 $\times$ 2 Figure Layout}
+%-----------------------------------------------------------
+    \begin{columns}[T]
+        % Column 1
+        \column{0.48\textwidth}
+            \centering
+            \includegraphics[width=0.85\linewidth, height=2.5cm]{figs/fig01.jpg}
+            \par\vspace{0.2cm}
+            \includegraphics[width=0.85\linewidth, height=2.5cm]{figs/fig02.jpg}
+
+        % Column 2
+        \column{0.48\textwidth}
+            \centering
+            \includegraphics[width=0.85\linewidth, height=2.5cm]{figs/fig03.jpg}
+            \par\vspace{0.2cm}
+            \includegraphics[width=0.85\linewidth, height=2.5cm]{figs/fig04.jpg}
+    \end{columns}
+\end{frame}
+
+%===========================================================
+\section{Code \& Algorithms}
+%===========================================================
+
+%-----------------------------------------------------------
+\begin{frame}[fragile]{Source Code (Minted)}
+%-----------------------------------------------------------
+    % Note: [fragile] is required for verbatim/minted
+    Here is a Python function using our custom colors:
+
+    \begin{minted}{python}
+def calculate_metric(data):
+    # This comment should be Orange (co)
+    result = 0
+    for x in data:
+        if x > 0:
+            result += x * 2  # Logic
+    return result
+    \end{minted}
+
+    \vspace{0.5em}
+    The frame color is gray, and keywords are highlighted.
+\end{frame}
+
+%-----------------------------------------------------------
+\begin{frame}{Algorithmic Pseudocode}
+%-----------------------------------------------------------
+    \begin{algorithm}[H]
+        \caption{Euclidean Distance}
+        \begin{algorithmic}[1]
+            \State \textbf{Input:} Points $P$ and $Q$
+            \State $sum \leftarrow 0$
+            \For{$i = 1$ to $n$}
+                \State $diff \leftarrow P_i - Q_i$
+                \State $sum \leftarrow sum + diff^2$
+            \EndFor
+            \State \Return $\sqrt{sum}$
+        \end{algorithmic}
+    \end{algorithm}
+\end{frame}
+
+%===========================================================
+\section{Conclusion}
+%===========================================================
+
+%-----------------------------------------------------------
+\begin{frame}{Critical Information}
+%-----------------------------------------------------------
+    Sometimes we need to draw attention to warnings.
+
+    \begin{alertblock}{Warning: Convergence}
+        The algorithm may not converge if the learning rate $\eta > 0.1$.
+        Please ensure normalization is applied first.
+    \end{alertblock}
+
+    \vspace{1em}
+    \centering
+    \tikz\node[draw=cr, text=cr, ultra thick, rotate=5, font=\bfseries\Large, inner sep=10pt] {IMPORTANT!};
+\end{frame}
+
+% --- Slide 15: Final Slide ---
+\begin{frame}{Summary}
+    \begin{itemize}
+        \item \textbf{Style:} Comic look + Serious Math.
+        \item \textbf{Structure:} Clear hierarchy with Headers/Footers.
+        \item \textbf{Visuals:} Flexible Grid Layouts.
+    \end{itemize}
+
+    \vspace{2em}
+    \centering
+    \Huge \textcolor{cp}{Thank You!}
+    
+    \vspace{0.5em}
+    \normalsize \textcolor{gray}{Any Questions?}
+\end{frame} 
+
+\end{document}
+%-----------------------------------------------------------

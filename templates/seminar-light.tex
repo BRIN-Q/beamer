@@ -1,0 +1,254 @@
+% ==========================================================
+% 1. PENGATURAN BAHASA & ENCODING
+% ==========================================================
+\usepackage[bahasa]{babel}      
+\usepackage[utf8]{inputenc}     
+\usepackage[T1]{fontenc}        
+
+% ==========================================================
+% 2. PENGATURAN FONT (Comic Style + Math Euler)
+% ==========================================================
+% --- Font Teks ---
+\usepackage[scaled=0.9]{helvet}  
+\renewcommand{\familydefault}{\sfdefault}
+\usefonttheme{structurebold}
+
+% --- Font Matematika ---
+\usefonttheme[onlymath]{serif}      
+\usepackage{mathpazo}               
+\usepackage{eulervm}                
+
+% FIX: Sembunyikan warning hbar
+\usepackage{silence}
+\WarningFilter{eulervm}{Symbol \hbar not available}
+
+% ==========================================================
+% 3. PAKET MATEMATIKA & ALGORITMA
+% ==========================================================
+\usepackage{amsmath,amssymb}
+\usepackage{algorithm}          
+\usepackage{algpseudocode}
+\usepackage{colortbl} 
+
+% ==========================================================
+% 4. PENGATURAN SPASI & LAYOUT
+% ==========================================================
+\usepackage{xpatch}             
+\setlength{\parskip}{0.5em}
+\xpatchcmd{\itemize}{\def\makelabel}{\setlength{\itemsep}{0.4em}\def\makelabel}{}{}
+\xpatchcmd{\enumerate}{\def\makelabel}{\setlength{\itemsep}{0.6em}\def\makelabel}{}{}
+\setbeamersize{text margin left=1cm, text margin right=1.5cm}
+
+% ==========================================================
+% 5. GRAFIK, WARNA & TIKZ
+% ==========================================================
+\usepackage{graphicx}
+\usepackage{pdfpages} 
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{shapes, arrows.meta, positioning, calc, backgrounds, fit, shadows, decorations.pathmorphing}
+\pgfplotsset{compat=1.18}
+\tikzset{wave/.style={decorate, decoration={snake, amplitude=2pt, segment length=8pt}}}
+
+% --- Definisi Palet Warna (Marker/Spidol) ---
+\definecolor{cb}{RGB}{0, 80, 180}     % Marker Blue 
+\definecolor{cr}{RGB}{200, 40, 40}    % Marker Red 
+\definecolor{co}{RGB}{230, 100, 0}    % Marker Orange 
+\definecolor{cg}{RGB}{0, 120, 60}     % Marker Green 
+\definecolor{cp}{RGB}{110, 0, 110}    % Marker Purple 
+\definecolor{cw}{RGB}{40, 40, 40}     % Tinta Hitam
+\definecolor{BoardDeep}{HTML}{FFFFFF} % Background Putih
+
+% ==========================================================
+% 6. PENGATURAN KODE PROGRAM (MINTED)
+% ==========================================================
+\usepackage{minted}
+\usemintedstyle{tango} 
+
+% Patch warna komentar (Menggunakan Oranye 'co')
+\makeatletter
+\AtBeginEnvironment{minted}{%
+    \expandafter\def\csname PYGtango@tok@c\endcsname{\textcolor{co}}% 
+    \expandafter\def\csname PYGtango@tok@c1\endcsname{\textcolor{co}}% 
+    \expandafter\def\csname PYGtango@tok@cm\endcsname{\textcolor{co}}% 
+    \expandafter\def\csname PYGtango@tok@cp\endcsname{\textcolor{co}}% 
+}
+\makeatother
+
+\setminted[python]{
+    fontsize=\footnotesize,    
+    linenos=false,            
+    breaklines=true,          
+    tabsize=4,
+    frame=lines,              
+    rulecolor=\color{gray!50},
+    bgcolor={},               
+}
+
+% ==========================================================
+% 7. TEMA BEAMER: WARNA ELEMEN (WHITEBOARD)
+% ==========================================================
+\setbeamercolor{background canvas}{bg=BoardDeep} 
+\setbeamercolor{normal text}{fg=cw}        
+
+% --- Header & Footer ---
+\setbeamercolor{frametitle}{fg=cp}        % Judul Frame jadi UNGU (cp)
+\setbeamercolor{title}{fg=cp}             % Judul Utama jadi UNGU (cp)
+\setbeamercolor{subtitle}{fg=co}          
+\setbeamercolor{author}{fg=cw}
+\setbeamercolor{institute}{fg=gray}
+\setbeamercolor{date}{fg=gray}
+
+% --- Warna Blok ---
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% Block Standar (Hijau Muda)
+\setbeamercolor{block title}{fg=cg, bg=cg!20}
+\setbeamercolor{block body}{fg=cw, bg=cg!10}
+
+% Alert Block (Merah Muda)
+\setbeamercolor{block title alerted}{fg=cr, bg=cr!20}
+\setbeamercolor{block body alerted}{fg=cw, bg=cr!10}
+
+% Example Block (Oranye Muda)
+\setbeamercolor{block title example}{fg=co, bg=co!20}
+\setbeamercolor{block body example}{fg=cw, bg=co!10}
+
+% --- Caption ---
+\setbeamercolor{caption}{fg=cg}
+
+% --- List Items ---
+\setbeamertemplate{itemize items}{\color{co}$\blacktriangleright$}
+
+% Custom Enumerate Item (Red Circle with White Number)
+\setbeamertemplate{enumerate item}{%
+    \tikz[baseline={([yshift=-.7ex]current bounding box.center)}]{%
+        \node[
+            circle,
+            fill=cr,          % Fill with Marker Red
+            text=white,       % Text White
+            font=\bfseries\footnotesize,
+            minimum size=1.4em,
+            inner sep=0pt
+        ] {\insertenumlabel};%
+    }%
+}
+
+% Keep sub-items simple (Purple)
+\setbeamercolor{enumerate subitem}{fg=cp} 
+\setbeamercolor{enumerate subsubitem}{fg=cp}
+
+% --- FIX: Add spacing before blocks to match text \parskip ---
+\addtobeamertemplate{block begin}{\vspace{0.5em}}{}
+\addtobeamertemplate{block alerted begin}{\vspace{0.5em}}{}
+\addtobeamertemplate{block example begin}{\vspace{0.5em}}{}
+
+% ==========================================================
+% 8. TEMA BEAMER: DAFTAR ISI (TOC) - RAPAT
+% ==========================================================
+\setbeamercolor{section in toc}{fg=cw}        
+\setbeamercolor{subsection in toc}{fg=cw}
+\setbeamercolor{subsubsection in toc}{fg=gray}
+\setbeamercolor{section number projected}{bg=cp, fg=white}
+\setbeamercolor{toc title}{fg=cp}
+
+% --- SECTION (Level 1) ---
+\setbeamertemplate{section in toc}{%
+  \leavevmode
+  \textcolor{cr}{$\bullet$}\hspace{1em}%
+  \inserttocsection
+  \par
+  % Adjusted to prevent overlap with subsections
+  \vspace{-0.5em} 
+}
+
+% --- SUBSECTION (Level 2) ---
+\setbeamertemplate{subsection in toc}{%
+  \hspace{1.5em}%
+  \textcolor{cp}{$\blacktriangleright$}\hspace{1em}%
+  \inserttocsubsection
+  \par
+  % Reduced vertical space for subsections
+  \vspace{-1em} 
+}
+
+% ==========================================================
+% 9. HEADER, FOOTER & TITLE PAGE (UPDATED)
+% ==========================================================
+\setbeamertemplate{navigation symbols}{} 
+
+% --- 1. NEW FOOTER (Dark Bar, Bottom Right) ---
+\setbeamercolor{footline}{bg=cw, fg=white}
+
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=1cm, rightskip=0.5cm]{footline}
+    \hfill 
+    \tiny  % Smaller font
+    \insertframenumber~/~\inserttotalframenumber
+  \end{beamercolorbox}%
+}
+
+% --- 2. HEADER (Adjusted Spacing) ---
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  % --- Box Judul ---
+  \begin{beamercolorbox}[
+    wd=\paperwidth,     
+    sep=1cm,            
+    leftskip=0cm,       
+    rightskip=0.5cm     
+  ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}
+  \vspace*{-2em} 
+}
+
+\setbeamertemplate{caption}{
+  \footnotesize
+  {\usebeamercolor[fg]{caption}\insertcaption}\par
+}
+
+% --- 3. TITLE PAGE ---
+\defbeamertemplate*{title page}{centered logo}{
+  \begin{center}
+    \vspace*{0.2\paperheight}
+    {\usebeamerfont{title}\inserttitle\par}
+    \vspace{0.8ex}
+    {\usebeamerfont{subtitle}\insertsubtitle\par}
+    \vfill
+    {\usebeamerfont{institute}\inserttitlegraphic\par}
+    \vspace*{-5em}
+  \end{center}
+}
+\setbeamertemplate{title page}[centered logo]
+
+% ==========================================================
+% 10. CUSTOM MACROS (FIX PAGE 1)
+% ==========================================================
+\newcommand{\shadowfig}[3][]{%
+  \tikz\node[inner sep=0pt, drop shadow, #1]{\includegraphics[#2]{#3}};%
+}
+\newcommand{\fade}{\transfade}
+\newcommand{\enterRight}{\reflectbox{\ensuremath{\hookleftarrow}}\,}
+
+% --- MACRO COVER BARU (Title Page with Footer Bar, No Number) ---
+\newcommand{\printcover}{
+    {
+    % 1. Hide Header
+    \setbeamertemplate{headline}{} 
+    \setbeamertemplate{frametitle}{} 
+    
+    % 2. Custom Footer for Cover: Draw the bar, but NO text
+    \setbeamertemplate{footline}{%
+      \begin{beamercolorbox}[wd=\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=1cm, rightskip=1cm]{footline}
+        % Empty content preserves the bar color/size
+      \end{beamercolorbox}%
+    }
+
+    % 3. Render Title Page
+    \begin{frame} 
+        \titlepage
+    \end{frame}
+    }
+    % 4. Reset page count
+    \setcounter{framenumber}{0} 
+}
