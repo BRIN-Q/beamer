@@ -57,6 +57,7 @@
 \definecolor{cp}{RGB}{110, 0, 110}    % Marker Purple 
 \definecolor{cw}{RGB}{40, 40, 40}     % Tinta Hitam
 \definecolor{BoardDeep}{HTML}{FFFFFF} % Background Putih
+\definecolor{fr}{RGB}{224, 17, 95}    % Footer Red
 
 % ==========================================================
 % 6. PENGATURAN KODE PROGRAM (MINTED)
@@ -176,20 +177,42 @@
 % ==========================================================
 \setbeamertemplate{navigation symbols}{} 
 
-% --- 1. NEW FOOTER (Dark Bar, Bottom Right) ---
-\setbeamercolor{footline}{bg=cw, fg=white}
+% --- Define Colors for Split Footer ---
+\setbeamercolor{footline_left}{bg=fr, fg=white}  % Left = Red
+\setbeamercolor{footline_right}{bg=cw, fg=white} % Right = Dark Grey
 
+% --- 1. NEW FOOTER (Split: Red Left, Black Right) ---
 \setbeamertemplate{footline}{%
-  \begin{beamercolorbox}[wd=\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=1cm, rightskip=0.5cm]{footline}
-    \hfill 
-    \tiny  % Smaller font
-    \insertframenumber~/~\inserttotalframenumber
-  \end{beamercolorbox}%
+  \leavevmode%
+  \hbox{%
+    % LEFT HALF: Red Bar (Empty or can hold Author name)
+    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=1cm]{footline_left}%
+      % \insertshortauthor % Uncomment if you want text here
+    \end{beamercolorbox}%
+    %
+    % RIGHT HALF: Black Bar (Page Number)
+    \begin{beamercolorbox}[wd=0.5\paperwidth, ht=2.5ex, dp=1.125ex, rightskip=2em]{footline_right}%
+      \hfill 
+      \tiny 
+      \insertframenumber~/~\inserttotalframenumber
+    \end{beamercolorbox}%
+  }%
 }
 
 % --- 2. HEADER (Adjusted Spacing) ---
 \setbeamertemplate{frametitle}{
   \nointerlineskip
+
+% --- LOGO INSERTION START ---
+  % This places the logo at the absolute top-right of the page
+  \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=north east, yshift=-0.2cm, xshift=-0.2cm] at (current page.north east) {
+          % REPLACE 'example-image' WITH YOUR LOGO FILENAME
+          \includegraphics[height=1cm]{templates/brinq-logo.png} 
+      };
+  \end{tikzpicture}
+  % --- LOGO INSERTION END ---
+  
   % --- Box Judul ---
   \begin{beamercolorbox}[
     wd=\paperwidth,     
@@ -230,18 +253,24 @@
 \newcommand{\fade}{\transfade}
 \newcommand{\enterRight}{\reflectbox{\ensuremath{\hookleftarrow}}\,}
 
-% --- MACRO COVER BARU (Title Page with Footer Bar, No Number) ---
+% --- MACRO COVER BARU (Updated for Split Footer) ---
 \newcommand{\printcover}{
     {
     % 1. Hide Header
     \setbeamertemplate{headline}{} 
     \setbeamertemplate{frametitle}{} 
     
-    % 2. Custom Footer for Cover: Draw the bar, but NO text
+    % 2. Custom Footer for Cover: Split Bar, but NO Numbers
     \setbeamertemplate{footline}{%
-      \begin{beamercolorbox}[wd=\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=1cm, rightskip=1cm]{footline}
-        % Empty content preserves the bar color/size
-      \end{beamercolorbox}%
+      \leavevmode%
+      \hbox{%
+        % Left Half: Red
+        \begin{beamercolorbox}[wd=0.5\paperwidth, ht=2.5ex, dp=1.125ex]{footline_left}%
+        \end{beamercolorbox}%
+        % Right Half: Black (Empty)
+        \begin{beamercolorbox}[wd=0.5\paperwidth, ht=2.5ex, dp=1.125ex]{footline_right}%
+        \end{beamercolorbox}%
+      }%
     }
 
     % 3. Render Title Page
