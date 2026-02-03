@@ -8,3 +8,17 @@ In Debian/Ubuntu-based Linux distributions, you can install TeXLive with the fol
 ```
 sudo apt install texlive-full
 ```
+
+There are two flavors of the templates:
+- `main-light.tex`: more suitable for formal seminars or conferences
+- `main-dark.tex`: more suitable for teaching or small classes
+
+Both flavors can be compiled with the usual `pdflatex` command:
+```
+pdflatex main-light.tex
+```
+or
+```~
+pdflatex main-dark.tex
+```
+
