@@ -1,0 +1,240 @@
+% ==========================================================
+% 1. PENGATURAN BAHASA & ENCODING
+% ==========================================================
+\usepackage[bahasa]{babel}      % Penyesuaian format tanggal/nama Indonesia
+\usepackage[utf8]{inputenc}     % Encoding karakter standar
+\usepackage[T1]{fontenc}        % Encoding font output
+\usepackage{physics}
+
+\usepackage{booktabs}
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+
+% ==========================================================
+% 2. PENGATURAN FONT (Comic Style + Math Euler)
+% ==========================================================
+% --- Font Teks ---
+\usepackage[scaled=1.2]{comicneue}  
+\renewcommand{\familydefault}{\sfdefault}
+\usefonttheme{structurebold}
+
+% --- Font Matematika ---
+\usefonttheme[onlymath]{serif}     % Matematika serif
+\usepackage{mathpazo}              % Palatino untuk operator
+\usepackage{eulervm}               % Euler untuk variabel 
+
+% FIX: Sembunyikan warning bahwa hbar diganti hslash
+\usepackage{silence}
+\WarningFilter{eulervm}{Symbol \hbar not available}
+\usepackage{eulervm}
+
+% --- TEKNIK PENEBALAN TEKS (MICRO-STROKE) ---
+% Menambahkan garis tepi tipis agar font terlihat lebih tebal
+% Sesuaikan LineWidth: 0.1pt (Tipis) s.d 0.4pt (Tebal)
+\usepackage{pdfrender}
+\AtBeginDocument{
+    \pdfrender{
+        TextRenderingMode=FillStroke,
+        LineWidth=0.2pt,  % <--- Ubah untuk atur ketebalan
+        FillColor=.,      % Warna isi mengikuti teks saat ini
+        StrokeColor=.     % Warna garis tepi mengikuti teks saat ini
+    }
+}
+
+% --- Pengaturan Vektor (Gaya Papan Tulis) ---
+%\usepackage[d]{esvect}             
+%\renewcommand{\vec}{\vv}
+\usepackage{bbm} 
+\renewcommand{\mathbf}[1]{\mathbbm{#1}}
+
+% ==========================================================
+% 3. PAKET MATEMATIKA & ALGORITMA
+% ==========================================================
+\usepackage{amsmath,amssymb}
+\usepackage{algorithm}         
+\usepackage{algpseudocode}
+
+% ==========================================================
+% 4. PENGATURAN SPASI & LAYOUT TEKS
+% ==========================================================
+\usepackage{xpatch}             
+
+% Mengatur jarak antar paragraf
+\setlength{\parskip}{0.5em}
+
+% Patch untuk memberi jarak antar item list (bullet points)
+% Itemize (Bullet) -> 0.4em
+\xpatchcmd{\itemize}{\def\makelabel}{\setlength{\itemsep}{0.4em}\def\makelabel}{}{}
+% Enumerate (Angka) -> 0.6em
+\xpatchcmd{\enumerate}{\def\makelabel}{\setlength{\itemsep}{0.6em}\def\makelabel}{}{}
+
+% Margin Kiri/Kanan Slide
+\setbeamersize{text margin left=1cm, text margin right=1cm}
+
+% ==========================================================
+% 5. GRAFIK, WARNA & TIKZ
+% ==========================================================
+\usepackage{graphicx}
+\usepackage{pdfpages} 
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{shapes, arrows.meta, positioning, calc, backgrounds, fit, shadows, decorations.pathmorphing}
+\pgfplotsset{compat=1.18}
+\tikzset{wave/.style={decorate, decoration={snake, amplitude=2pt, segment length=8pt}}}
+
+% --- Definisi Palet Warna (Chalk/Kapur) ---
+\definecolor{cb}{RGB}{85, 160, 220}   % Chalk Blue
+\definecolor{cr}{RGB}{219, 112, 147}  % Chalk Red 
+\definecolor{co}{RGB}{255, 170, 80}   % Chalk Orange
+\definecolor{cg}{RGB}{140, 220, 140}  % Chalk Green 
+\definecolor{cw}{RGB}{240, 240, 240}  % Chalk White 
+\definecolor{BoardDeep}{HTML}{111111} % Background Gelap
+
+% --- FIX TIKZ PICTURE (TOTAL RESET) ---
+% Perintah ini akan mematikan efek "Fake Bold" khusus TikZ
+
+\tikzset{
+    every picture/.append style={
+        execute at begin picture={
+            % Reset mode ke "Fill" saja (tanpa garis tepi)
+            \pdfrender{TextRenderingMode=Fill, LineWidth=0pt}
+        }
+    }
+}
+
+% ==========================================================
+% 6. PENGATURAN KODE PROGRAM (MINTED)
+% ==========================================================
+\usepackage{minted}
+\usemintedstyle{monokai}
+
+\setminted[python]{
+    fontsize=\footnotesize,   
+    linenos=false,          
+    breaklines=true,        
+    tabsize=4,
+    frame=none,             
+    bgcolor={},             % Transparan (menyatu bg slide)
+}
+
+% ==========================================================
+% 7. TEMA BEAMER: WARNA ELEMEN
+% ==========================================================
+% --- Warna Latar & Teks Utama ---
+%\setbeamercolor{background canvas}{bg=BoardDeep} 
+
+% Menggunakan file 'chalkboard.jpg' sebagai latar belakang
+\usebackgroundtemplate{%
+\tikz[overlay,remember picture] \node[opacity=1, at=(current page.center)] {
+   % Pastikan file chalkboard.jpg ada di folder yang sama!
+   \includegraphics[height=\paperheight, 
+   width=\paperwidth]{templates/chalkboard.jpg}};
+}
+\setbeamercolor{normal text}{fg=cw}      
+
+% --- Warna Header & Footer ---
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{title}{fg=cw}
+\setbeamercolor{subtitle}{fg=cb}
+\setbeamercolor{author}{fg=white!70!blue}
+\setbeamercolor{institute}{fg=white!70!gray}
+\setbeamercolor{date}{fg=white!70!gray}
+
+% --- Warna Blok & Caption ---
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamercolor{block title}{fg=cg, bg=black!85}
+\setbeamercolor{block body}{fg=white, bg=black!80}
+\setbeamercolor{block title alerted}{fg=cr, bg=black!60}
+\setbeamercolor{block body alerted}{fg=cw, bg=black!30}
+\setbeamercolor{block title example}{fg=co, bg=black!60}
+\setbeamercolor{block body example}{fg=cw, bg=black!30}
+
+% --- Caption ---
+\setbeamercolor{caption}{fg=cg}
+
+% --- Warna List (Itemize/Enumerate) ---
+\setbeamertemplate{itemize items}{\color{co}$\blacktriangleright$} % Bullet Segitiga Oranye
+\setbeamercolor{enumerate item}{fg=cb}        % Angka Biru
+\setbeamercolor{enumerate subitem}{fg=cb}
+\setbeamercolor{enumerate subsubitem}{fg=cb}
+
+% ==========================================================
+% 8. TEMA BEAMER: DAFTAR ISI (TOC)
+% ==========================================================
+% Menggunakan warna ungu manual (purple) untuk panah di TOC
+\setbeamercolor{section in toc}{fg=cw}
+\setbeamercolor{subsection in toc}{fg=cb}
+\setbeamercolor{subsubsection in toc}{fg=white!50!gray}
+\setbeamercolor{section number projected}{bg=blue!80, fg=black}
+\setbeamercolor{toc title}{fg=yellow!80!white}
+
+\setbeamertemplate{section in toc}{%
+  \leavevmode
+  \textcolor{cr}{$\bullet$}\hspace{1em}%
+  \inserttocsection\par}
+
+\setbeamertemplate{subsection in toc}{%
+  \hspace{1.5em}%
+  \textcolor{purple}{$\blacktriangleright$}\hspace{1em}%
+  \inserttocsubsection\par}
+
+% ==========================================================
+% 9. TEMA BEAMER: TEMPLATE HEADER & TITLE
+% ==========================================================
+% Hilangkan simbol navigasi kecil
+\setbeamertemplate{navigation symbols}{} 
+
+% Format Judul Frame (Header)
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{beamercolorbox}[
+    wd=\paperwidth,    
+    sep=1cm,           
+    leftskip=0cm,      
+    rightskip=0.5cm    
+  ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}
+  \vspace*{-1.5em} 
+}
+
+% Format Caption Gambar
+\setbeamertemplate{caption}{
+  \footnotesize
+  {\usebeamercolor[fg]{caption}\insertcaption}\par
+}
+
+% Format Halaman Judul (Title Page)
+\defbeamertemplate*{title page}{centered logo}{
+  \begin{center}
+    \vspace*{0.15\paperheight} % Slightly adjusted top margin  
+    % Title
+    {\usebeamerfont{title}\inserttitle\par}    
+    % Subtitle
+    \vspace{0.8ex}
+    {\usebeamerfont{subtitle}\insertsubtitle\par}    
+    % Author (Added)
+    \vspace{1em}
+    {\usebeamerfont{author}\insertauthor\par}
+    % Institute (Added)
+    \vspace{0.5em}{\usebeamerfont{institute}\footnotesize\insertinstitute\par}    
+    \vfill    
+    % Logo/Graphic
+    {\usebeamerfont{institute}\inserttitlegraphic\par}
+    \vspace*{-2em}
+  \end{center}
+}
+
+\setbeamertemplate{title page}[centered logo]
+% ==========================================================
+% 10. CUSTOM COMMANDS (MACRO)
+% ==========================================================
+% Macro untuk menyisipkan gambar dengan bayangan
+\newcommand{\shadowfig}[3][]{%
+  \tikz\node[inner sep=0pt, drop shadow, #1]{\includegraphics[#2]{#3}};%
+}
+
+% Shortcut untuk transisi fade
+\newcommand{\fade}{\transfade}
+
+% Symbol for enter:
+\newcommand{\enterRight}{\reflectbox{\ensuremath{\hookleftarrow}}\,}
