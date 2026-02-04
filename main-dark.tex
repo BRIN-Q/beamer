@@ -8,7 +8,7 @@ assisted by \textcolor{cr}{M. S. Fittuqo} (sophomore IT student from UGM)\\
 \textcolor{cb}{https://github.com/Syauqi-dotcom/BRIN-Internship-2026}}
 \titlegraphic{
 % sesuaikan logo di bawah ini:
-\includegraphics[width=2cm]{templates/logo-prfk-eng.png}
+\includegraphics[width=1cm]{templates/quacompute.png}
 }
 %-----------------------------------------------------------
 \begin{document}
@@ -38,7 +38,7 @@ assisted by \textcolor{cr}{M. S. Fittuqo} (sophomore IT student from UGM)\\
 
     Direct example: To calculate the hydrogen molecule ($H_2$) orbital, we employ the \textbf{LCAO (Linear Combination of Atomic Orbitals)} approximation.
     
-    We define the molecular wavefunction $\ket{\psi_{H_2}}$ as:
+    figsWe define the molecular wavefunction $\ket{\psi_{H_2}}$ as:
     \begin{align*}
         \ket{\psi_{H_2}} &= c_1 \ket{H_{1s}^{(1)}} + c_2 \ket{H_{1s}^{(2)}} \\ \\
         \ket{\psi} &= c_1 \ket{\phi_1} + c_2 \ket{\phi_2}
@@ -565,7 +565,7 @@ assisted by \textcolor{cr}{M. S. Fittuqo} (sophomore IT student from UGM)\\
             \vspace{1em}
             \centering
             \includegraphics[width=\linewidth]{figs/kegelapan/Energy-Alpha-VMC.pdf}
-            {\footnotesize \centering Optimizing the variational parameter}
+            {\footnotesize \centering Optimizing the variatonal parameter}
     \end{columns}
 \end{frame}
 
@@ -575,7 +575,7 @@ assisted by \textcolor{cr}{M. S. Fittuqo} (sophomore IT student from UGM)\\
     \begin{enumerate}
         \item \textbf{Wavefunction ($\Psi_T$):} Single update costs
         
-        \item \textbf{Sampling Loop:} Updates all $N$ electrons per sweep $$N \times \mathcal{O}(N^2) = \mathcal{O}(N^3)$$
+        \item \textbf{Sampling Loop:} Updates all $N$ electrons per sweep $$N \times O(N^2) = \mathcal{O}(N^3)$$
         
         \item \textbf{Optimization:} Multiplies cost by steps ($K$) and samples ($M$).
     \end{enumerate}
@@ -695,7 +695,7 @@ assisted by \textcolor{cr}{M. S. Fittuqo} (sophomore IT student from UGM)\\
     \end{block}
 
     \begin{block}{Stage C: Jordan-Wigner Transform (The Bridge)}
-        \textbf{Mapping:} Translate Fermions to Qubits ($a^\dagger \to X, Y, Z$).
+        \textbf{Mapping:} Translate Fermions to Qubits ($a^\dagger \to X, Y, Z$).\\
         \textbf{Mechanism:} Uses Parity Strings to mimic anti-symmetry.
     \end{block}
 
@@ -732,13 +732,13 @@ assisted by \textcolor{cr}{M. S. Fittuqo} (sophomore IT student from UGM)\\
     VQE is a \textcolor{cb}{hybrid algorithm (Quantum + Classical)} designed to find the ground state energy ($E_0$) (e.g. of a molecule) using \textcolor{cr}{Variational Principle}
 
     \begin{block}{Input}
-        \textbf{Hamiltonian ($\hat{H}_{qubit}$):} Decomposed into Pauli Strings $\sum c_i P_i$.
+        \textbf{Hamiltonian ($\hat{H}_{qubit}$):} Decomposed into Pauli Strings $\sum c_i P_i$.\\
         \textbf{Parameters ($\vec{\theta}$):} Rotation angles controlling the Ansatz.
     \end{block}
 
     \begin{block}{Loop}
-        \textbf{QPU (Measure):} Run circuit $U(\vec{\theta})$ and sample expectation values.
-        \textbf{CPU (Optimize):} Aggregate Energy ($E_{tot}$) and update $\vec{\theta}$ to minimize cost.
+        \textbf{QPU (Measure):} Run circuit $U(\vec{\theta})$ and sample expectation values.\\
+        \textbf{CPU (Optimize):} Aggregate Energy ($E_{tot}$) and update $\vec{\theta}$ to minimize cost.\\
         \textbf{Repeat:} Iterate until convergence to Ground State.
     \end{block}
 \end{frame}
@@ -778,7 +778,7 @@ assisted by \textcolor{cr}{M. S. Fittuqo} (sophomore IT student from UGM)\\
         \textbf{Ansatz Approach} & \textbf{Heuristic Guessing} & \textbf{Scalable Approximation} \\ 
         & (Based on Physical Intuition) & (Systematic Circuit Expansion) \\ \hline
         
-        \textbf{Computational Cost} & \textcolor{cb}{$\mathcal{O}(N^3)$} (Polynomial) & \textcolor{cr}{$\mathcal{O}(N)$} (Hamiltonian Terms)* \\ \hline
+        \textbf{Computational Cost} & \textcolor{cb}{${O(N^3)}$} (Polynomial) & \textcolor{cr}{$\mathcal{O}(N)$} (Hamiltonian Terms)* \\ \hline
         
         \textbf{Bottleneck} & \textbf{Sampling Loop} & \textbf{Measurement Loop} \\
         & (Moving Electrons via CPU) & (Shot Noise via QPU) \\ \hline
